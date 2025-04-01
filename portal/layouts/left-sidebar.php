@@ -45,7 +45,7 @@
       <li class="side-nav-title">Navigation</li>
 
       <li class="side-nav-item">
-        <a data-bs-toggle="collapse" href="#sidebarDashboards" aria-expanded="false" aria-controls="sidebarDashboards"
+        <a href="index.php" 
           class="side-nav-link">
           <i class="ri-home-4-line"></i>
           <span> Home </span>
@@ -53,21 +53,21 @@
       </li>
 
       <li class="side-nav-item">
-        <a href="apps-calendar.php" class="side-nav-link">
+        <a href="profile.php" class="side-nav-link">
           <i class="ri-shield-user-line"></i>
           <span> Profile </span>
         </a>
       </li>
 
       <li class="side-nav-item">
-        <a href="apps-calendar.php" class="side-nav-link">
+        <a href="card.php" class="side-nav-link">
           <i class="ri-profile-line"></i>
           <span> Membership Card </span>
         </a>
       </li>
 
       <li class="side-nav-item">
-        <a href="apps-calendar.php" class="side-nav-link">
+        <a href="payment.php" class="side-nav-link">
         <i class="ri-coins-line"></i>
           <span> Dues </span>
         </a>
@@ -76,7 +76,7 @@
       <li class="side-nav-title">Account</li>
 
       <li class="side-nav-item">
-        <a href="apps-calendar.php" class="side-nav-link">
+        <a href="logout.php" class="side-nav-link">
         <i class="ri-logout-box-line fs-18 align-middle me-1"></i>
           <span> Logout </span>
         </a>

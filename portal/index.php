@@ -97,8 +97,8 @@
                                 <div class="card-body">
                                     <div class="d-flex align-items-center" style="justify-content: space-between;">
                                         <div>
-                                            <h3 class="mt-0 fw-normal cta-box-title">View your membership card</h3>
-                                            <a href="#" class="link-success link-offset-3 fw-bold">View card <i class="ri-arrow-right-line"></i></a>
+                                            <h3 class="mt-0 fw-normal cta-box-title">View your ID card</h3>
+                                            <a href="card.php" class="link-success link-offset-3 fw-bold">View card <i class="ri-arrow-right-line"></i></a>
                                         </div>
                                         <i class="bi bi-card-heading ms-3 fs-20" style="font-size: 40px !important;"></i>
                                     </div>
@@ -111,8 +111,8 @@
                                 <div class="card-body">
                                     <div class="d-flex align-items-center" style="justify-content: space-between;">
                                         <div>
-                                            <h3 class="mt-0 fw-normal cta-box-title">Manage your management dues</h3>
-                                            <a href="#" class="link-success link-offset-3 fw-bold">Manage dues <i class="ri-arrow-right-line"></i></a>
+                                            <h3 class="mt-0 fw-normal cta-box-title">Manage your membership dues</h3>
+                                            <a href="payment.php" class="link-success link-offset-3 fw-bold">Manage dues <i class="ri-arrow-right-line"></i></a>
                                         </div>
                                         <i class="bi bi-cash-coin ms-3 fs-20" style="font-size: 40px !important;"></i>
                                     </div>

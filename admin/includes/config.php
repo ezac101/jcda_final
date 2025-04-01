@@ -25,10 +25,12 @@ define('SMTP_PASSWORD', 'zZ[6oxwGFg.F');
 define('SMTP_FROM_EMAIL', 'noreply@jcda.com.ng');
 define('SMTP_FROM_NAME', 'JCDA');
 
-// Session configuration
-ini_set('session.cookie_lifetime', 60 * 60 * 24 * 7); // 1 week
-ini_set('session.gc_maxlifetime', 60 * 60 * 24 * 7); // 1 week
-session_start();
+// Session configuration - only if session hasn't started yet
+if (session_status() === PHP_SESSION_NONE) {
+    ini_set('session.cookie_lifetime', 60 * 60 * 24 * 7); // 1 week
+    ini_set('session.gc_maxlifetime', 60 * 60 * 24 * 7); // 1 week
+    session_start();
+}
 
 // Error reporting (disable in production)
 error_reporting(E_ALL);

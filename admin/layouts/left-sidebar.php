@@ -39,14 +39,14 @@
   <div class="h-100" id="leftside-menu-container" data-simplebar>
     <!-- Leftbar User -->
     <div class="leftbar-user">
-      <a href="pages-profile.php">
+      <a href="admin-profile.php">
         <img
           src="assets/images/users/avatar-1.jpg"
           alt="user-image"
           height="42"
           class="rounded-circle shadow-sm"
         />
-        <span class="leftbar-user-name mt-2">Tosha Minner</span>
+        <span class="leftbar-user-name mt-2"><?php echo isset($_SESSION['admin_username']) ? $_SESSION['admin_username'] : 'Admin User'; ?></span>
       </a>
     </div>
 
@@ -55,64 +55,37 @@
       <li class="side-nav-title">Navigation</li>
 
       <li class="side-nav-item">
-        <a
-          data-bs-toggle="collapse"
-          href="#sidebarDashboards"
-          aria-expanded="false"
-          aria-controls="sidebarDashboards"
-          class="side-nav-link"
-        >
-          <i class="ri-home-4-line"></i>
-          <span class="badge bg-success float-end">2</span>
-          <span> Dashboards </span>
-        </a>
-        <div class="collapse" id="sidebarDashboards">
-          <ul class="side-nav-second-level">
-            <li>
-              <a href="dashboard-analytics.php">Analytics</a>
-            </li>
-            <li>
-              <a href="index.php">Ecommerce</a>
-            </li>
-          </ul>
-        </div>
-      </li>
-
-      <li class="side-nav-title">Apps</li>
-
-      <li class="side-nav-item">
-        <a href="apps-calendar.php" class="side-nav-link">
-          <i class="ri-calendar-event-line"></i>
-          <span> Calendar </span>
-        </a>
-      </li>
-
-      <li class="side-nav-item">
-        <a href="apps-chat.php" class="side-nav-link">
-          <i class="ri-message-3-line"></i>
-          <span> Chat </span>
+        <a href="dashboard.php" class="side-nav-link">
+          <i class="ri-dashboard-line"></i>
+          <span> Dashboard </span>
         </a>
       </li>
 
       <li class="side-nav-item">
         <a
           data-bs-toggle="collapse"
-          href="#sidebarEmail"
+          href="#sidebarUserManagement"
           aria-expanded="false"
-          aria-controls="sidebarEmail"
+          aria-controls="sidebarUserManagement"
           class="side-nav-link"
         >
-          <i class="ri-mail-line"></i>
-          <span> Email </span>
+          <i class="ri-user-line"></i>
+          <span> User Management </span>
           <span class="menu-arrow"></span>
         </a>
-        <div class="collapse" id="sidebarEmail">
+        <div class="collapse" id="sidebarUserManagement">
           <ul class="side-nav-second-level">
             <li>
-              <a href="apps-email-inbox.php">Inbox</a>
+              <a href="users.php">All Users</a>
             </li>
             <li>
-              <a href="apps-email-read.php">Read Email</a>
+              <a href="user-add.php">Add New User</a>
+            </li>
+            <li>
+              <a href="user-groups.php">User Groups/Roles</a>
+            </li>
+            <li>
+              <a href="user-search.php">User Search</a>
             </li>
           </ul>
         </div>
@@ -121,80 +94,28 @@
       <li class="side-nav-item">
         <a
           data-bs-toggle="collapse"
-          href="#sidebarTasks"
+          href="#sidebarProfileManagement"
           aria-expanded="false"
-          aria-controls="sidebarTasks"
+          aria-controls="sidebarProfileManagement"
           class="side-nav-link"
         >
-          <i class="ri-task-line"></i>
-          <span> Tasks </span>
+          <i class="ri-profile-line"></i>
+          <span> Profile Management </span>
           <span class="menu-arrow"></span>
         </a>
-        <div class="collapse" id="sidebarTasks">
+        <div class="collapse" id="sidebarProfileManagement">
           <ul class="side-nav-second-level">
             <li>
-              <a href="apps-tasks.php">List</a>
+              <a href="profiles-complete.php">Complete Profiles</a>
             </li>
             <li>
-              <a href="apps-tasks-details.php">Details</a>
-            </li>
-          </ul>
-        </div>
-      </li>
-
-      <li class="side-nav-item">
-        <a href="apps-kanban.php" class="side-nav-link">
-          <i class="ri-list-check-3"></i>
-          <span> Kanban Board </span>
-        </a>
-      </li>
-
-      <li class="side-nav-item">
-        <a href="apps-file-manager.php" class="side-nav-link">
-          <i class="ri-folder-2-line"></i>
-          <span> File Manager </span>
-        </a>
-      </li>
-
-      <li class="side-nav-title">Custom</li>
-
-      <li class="side-nav-item">
-        <a
-          data-bs-toggle="collapse"
-          href="#sidebarPages"
-          aria-expanded="false"
-          aria-controls="sidebarPages"
-          class="side-nav-link"
-        >
-          <i class="ri-pages-line"></i>
-          <span> Pages </span>
-          <span class="menu-arrow"></span>
-        </a>
-        <div class="collapse" id="sidebarPages">
-          <ul class="side-nav-second-level">
-            <li>
-              <a href="pages-profile.php">Profile</a>
+              <a href="profiles-incomplete.php">Incomplete Profiles</a>
             </li>
             <li>
-              <a href="pages-invoice.php">Invoice</a>
+              <a href="profiles-approval.php">Profile Approval</a>
             </li>
             <li>
-              <a href="pages-faq.php">FAQ</a>
-            </li>
-            <li>
-              <a href="pages-pricing.php">Pricing</a>
-            </li>
-            <li>
-              <a href="pages-maintenance.php">Maintenance</a>
-            </li>
-            <li>
-              <a href="pages-starter.php">Starter Page</a>
-            </li>
-            <li>
-              <a href="pages-preloader.php">With Preloader</a>
-            </li>
-            <li>
-              <a href="pages-timeline.php">Timeline</a>
+              <a href="profiles-fields.php">Profile Fields Configuration</a>
             </li>
           </ul>
         </div>
@@ -203,52 +124,28 @@
       <li class="side-nav-item">
         <a
           data-bs-toggle="collapse"
-          href="#sidebarPagesAuth"
+          href="#sidebarFinancialManagement"
           aria-expanded="false"
-          aria-controls="sidebarPagesAuth"
+          aria-controls="sidebarFinancialManagement"
           class="side-nav-link"
         >
-          <i class="ri-shield-user-line"></i>
-          <span> Auth Pages </span>
+          <i class="ri-money-dollar-circle-line"></i>
+          <span> Financial Management </span>
           <span class="menu-arrow"></span>
         </a>
-        <div class="collapse" id="sidebarPagesAuth">
+        <div class="collapse" id="sidebarFinancialManagement">
           <ul class="side-nav-second-level">
             <li>
-              <a href="auth-login.php">Login</a>
+              <a href="payments.php">Payments Overview</a>
             </li>
             <li>
-              <a href="auth-login-2.php">Login 2</a>
+              <a href="transactions.php">Transaction History</a>
             </li>
             <li>
-              <a href="auth-register.php">Register</a>
+              <a href="payment-settings.php">Payment Settings</a>
             </li>
             <li>
-              <a href="auth-register-2.php">Register 2</a>
-            </li>
-            <li>
-              <a href="auth-logout.php">Logout</a>
-            </li>
-            <li>
-              <a href="auth-logout-2.php">Logout 2</a>
-            </li>
-            <li>
-              <a href="auth-recoverpw.php">Recover Password</a>
-            </li>
-            <li>
-              <a href="auth-recoverpw-2.php">Recover Password 2</a>
-            </li>
-            <li>
-              <a href="auth-lock-screen.php">Lock Screen</a>
-            </li>
-            <li>
-              <a href="auth-lock-screen-2.php">Lock Screen 2</a>
-            </li>
-            <li>
-              <a href="auth-confirm-mail.php">Confirm Mail</a>
-            </li>
-            <li>
-              <a href="auth-confirm-mail-2.php">Confirm Mail 2</a>
+              <a href="financial-reports.php">Financial Reports</a>
             </li>
           </ul>
         </div>
@@ -257,25 +154,63 @@
       <li class="side-nav-item">
         <a
           data-bs-toggle="collapse"
-          href="#sidebarPagesError"
+          href="#sidebarRegistrationManagement"
           aria-expanded="false"
-          aria-controls="sidebarPagesError"
+          aria-controls="sidebarRegistrationManagement"
           class="side-nav-link"
         >
-          <i class="ri-error-warning-line"></i>
-          <span> Error Pages </span>
+          <i class="ri-user-add-line"></i>
+          <span> Registration Management </span>
           <span class="menu-arrow"></span>
         </a>
-        <div class="collapse" id="sidebarPagesError">
+        <div class="collapse" id="sidebarRegistrationManagement">
           <ul class="side-nav-second-level">
             <li>
-              <a href="error-404.php">Error 404</a>
+              <a href="registrations-pending.php">Pending Registrations</a>
             </li>
             <li>
-              <a href="error-404-alt.php">Error 404-alt</a>
+              <a href="registrations-approved.php">Approved Registrations</a>
             </li>
             <li>
-              <a href="error-500.php">Error 500</a>
+              <a href="registrations-rejected.php">Rejected Registrations</a>
+            </li>
+            <li>
+              <a href="registration-settings.php">Registration Settings</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="side-nav-title">Reports & Tools</li>
+
+      <li class="side-nav-item">
+        <a
+          data-bs-toggle="collapse"
+          href="#sidebarReports"
+          aria-expanded="false"
+          aria-controls="sidebarReports"
+          class="side-nav-link"
+        >
+          <i class="ri-bar-chart-box-line"></i>
+          <span> Reports & Analytics </span>
+          <span class="menu-arrow"></span>
+        </a>
+        <div class="collapse" id="sidebarReports">
+          <ul class="side-nav-second-level">
+            <li>
+              <a href="reports-user.php">User Reports</a>
+            </li>
+            <li>
+              <a href="reports-financial.php">Financial Reports</a>
+            </li>
+            <li>
+              <a href="reports-activity.php">Activity Reports</a>
+            </li>
+            <li>
+              <a href="reports-custom.php">Custom Reports</a>
+            </li>
+            <li>
+              <a href="data-export.php">Data Export</a>
             </li>
           </ul>
         </div>
@@ -284,477 +219,84 @@
       <li class="side-nav-item">
         <a
           data-bs-toggle="collapse"
-          href="#sidebarLayouts"
+          href="#sidebarCommunication"
           aria-expanded="false"
-          aria-controls="sidebarLayouts"
+          aria-controls="sidebarCommunication"
           class="side-nav-link"
         >
-          <i class="ri-layout-line"></i>
-          <span> Layouts </span>
+          <i class="ri-mail-send-line"></i>
+          <span> Communications </span>
           <span class="menu-arrow"></span>
         </a>
-        <div class="collapse" id="sidebarLayouts">
+        <div class="collapse" id="sidebarCommunication">
           <ul class="side-nav-second-level">
             <li>
-              <a href="layouts-horizontal.php" target="_blank">Horizontal</a>
+              <a href="email-templates.php">Email Templates</a>
             </li>
             <li>
-              <a href="layouts-detached.php" target="_blank">Detached</a>
+              <a href="send-notifications.php">Send Notifications</a>
             </li>
             <li>
-              <a href="layouts-full.php" target="_blank">Full View</a>
+              <a href="email-history.php">Email History</a>
             </li>
             <li>
-              <a href="layouts-fullscreen.php" target="_blank"
-                >Fullscreen View</a
-              >
-            </li>
-            <li>
-              <a href="layouts-hover.php" target="_blank">Hover Menu</a>
-            </li>
-            <li>
-              <a href="layouts-compact.php" target="_blank">Compact</a>
-            </li>
-            <li>
-              <a href="layouts-icon-view.php" target="_blank">Icon View</a>
+              <a href="messaging.php">SMS/Messaging</a>
             </li>
           </ul>
         </div>
       </li>
 
-      <li class="side-nav-title">Components</li>
+      <li class="side-nav-title">Administration</li>
 
       <li class="side-nav-item">
         <a
           data-bs-toggle="collapse"
-          href="#sidebarBaseUI"
+          href="#sidebarSystemAdmin"
           aria-expanded="false"
-          aria-controls="sidebarBaseUI"
+          aria-controls="sidebarSystemAdmin"
           class="side-nav-link"
         >
-          <i class="ri-briefcase-line"></i>
-          <span> Base UI </span>
+          <i class="ri-settings-2-line"></i>
+          <span> System Administration </span>
           <span class="menu-arrow"></span>
         </a>
-        <div class="collapse" id="sidebarBaseUI">
+        <div class="collapse" id="sidebarSystemAdmin">
           <ul class="side-nav-second-level">
             <li>
-              <a href="ui-accordions.php">Accordions</a>
+              <a href="admin-logs.php">Admin Logs</a>
             </li>
             <li>
-              <a href="ui-alerts.php">Alerts</a>
+              <a href="admin-accounts.php">Admin Accounts</a>
             </li>
             <li>
-              <a href="ui-avatars.php">Avatars</a>
+              <a href="system-settings.php">System Settings</a>
             </li>
             <li>
-              <a href="ui-badges.php">Badges</a>
-            </li>
-            <li>
-              <a href="ui-breadcrumb.php">Breadcrumb</a>
-            </li>
-            <li>
-              <a href="ui-buttons.php">Buttons</a>
-            </li>
-            <li>
-              <a href="ui-cards.php">Cards</a>
-            </li>
-            <li>
-              <a href="ui-carousel.php">Carousel</a>
-            </li>
-            <li>
-              <a href="ui-collapse.php">Collapse</a>
-            </li>
-            <li>
-              <a href="ui-dropdowns.php">Dropdowns</a>
-            </li>
-            <li>
-              <a href="ui-embed-video.php">Embed Video</a>
-            </li>
-            <li>
-              <a href="ui-grid.php">Grid</a>
-            </li>
-            <li>
-              <a href="ui-links.php">Links</a>
-            </li>
-            <li>
-              <a href="ui-list-group.php">List Group</a>
-            </li>
-            <li>
-              <a href="ui-modals.php">Modals</a>
-            </li>
-            <li>
-              <a href="ui-notifications.php">Notifications</a>
-            </li>
-            <li>
-              <a href="ui-offcanvas.php">Offcanvas</a>
-            </li>
-            <li>
-              <a href="ui-placeholders.php">Placeholders</a>
-            </li>
-            <li>
-              <a href="ui-pagination.php">Pagination</a>
-            </li>
-            <li>
-              <a href="ui-popovers.php">Popovers</a>
-            </li>
-            <li>
-              <a href="ui-progress.php">Progress</a>
-            </li>
-            <li>
-              <a href="ui-spinners.php">Spinners</a>
-            </li>
-            <li>
-              <a href="ui-tabs.php">Tabs</a>
-            </li>
-            <li>
-              <a href="ui-tooltips.php">Tooltips</a>
-            </li>
-            <li>
-              <a href="ui-typography.php">Typography</a>
-            </li>
-            <li>
-              <a href="ui-utilities.php">Utilities</a>
+              <a href="backup-restore.php">Backup/Restore</a>
             </li>
           </ul>
         </div>
       </li>
 
       <li class="side-nav-item">
-        <a
-          data-bs-toggle="collapse"
-          href="#sidebarExtendedUI"
-          aria-expanded="false"
-          aria-controls="sidebarExtendedUI"
-          class="side-nav-link"
-        >
-          <i class="ri-stack-line"></i>
-          <span> Extended UI </span>
-          <span class="menu-arrow"></span>
-        </a>
-        <div class="collapse" id="sidebarExtendedUI">
-          <ul class="side-nav-second-level">
-            <li>
-              <a href="extended-dragula.php">Dragula</a>
-            </li>
-            <li>
-              <a href="extended-range-slider.php">Range Slider</a>
-            </li>
-            <li>
-              <a href="extended-ratings.php">Ratings</a>
-            </li>
-            <li>
-              <a href="extended-scrollbar.php">Scrollbar</a>
-            </li>
-            <li>
-              <a href="extended-scrollspy.php">Scrollspy</a>
-            </li>
-          </ul>
-        </div>
-      </li>
-
-      <li class="side-nav-item">
-        <a href="widgets.php" class="side-nav-link">
-          <i class="ri-pencil-ruler-2-line"></i>
-          <span> Widgets </span>
+        <a href="admin-profile.php" class="side-nav-link">
+          <i class="ri-user-settings-line"></i>
+          <span> My Profile </span>
         </a>
       </li>
 
       <li class="side-nav-item">
-        <a
-          data-bs-toggle="collapse"
-          href="#sidebarIcons"
-          aria-expanded="false"
-          aria-controls="sidebarIcons"
-          class="side-nav-link"
-        >
-          <i class="ri-service-line"></i>
-          <span> Icons </span>
-          <span class="menu-arrow"></span>
+        <a href="help-support.php" class="side-nav-link">
+          <i class="ri-question-line"></i>
+          <span> Help & Support </span>
         </a>
-        <div class="collapse" id="sidebarIcons">
-          <ul class="side-nav-second-level">
-            <li>
-              <a href="icons-remixicons.php">Remix Icons</a>
-            </li>
-            <li>
-              <a href="icons-bootstrap.php">Bootstrap Icons</a>
-            </li>
-          </ul>
-        </div>
       </li>
 
       <li class="side-nav-item">
-        <a
-          data-bs-toggle="collapse"
-          href="#sidebarCharts"
-          aria-expanded="false"
-          aria-controls="sidebarCharts"
-          class="side-nav-link"
-        >
-          <i class="ri-bar-chart-line"></i>
-          <span> Charts </span>
-          <span class="menu-arrow"></span>
+        <a href="logout.php" class="side-nav-link">
+          <i class="ri-logout-box-line"></i>
+          <span> Logout </span>
         </a>
-        <div class="collapse" id="sidebarCharts">
-          <ul class="side-nav-second-level">
-            <li class="side-nav-item">
-              <a
-                data-bs-toggle="collapse"
-                href="#sidebarApexCharts"
-                aria-expanded="false"
-                aria-controls="sidebarApexCharts"
-              >
-                <span> Apex Charts </span>
-                <span class="menu-arrow"></span>
-              </a>
-              <div class="collapse" id="sidebarApexCharts">
-                <ul class="side-nav-third-level">
-                  <li>
-                    <a href="charts-apex-area.php">Area</a>
-                  </li>
-                  <li>
-                    <a href="charts-apex-bar.php">Bar</a>
-                  </li>
-                  <li>
-                    <a href="charts-apex-bubble.php">Bubble</a>
-                  </li>
-                  <li>
-                    <a href="charts-apex-candlestick.php">Candlestick</a>
-                  </li>
-                  <li>
-                    <a href="charts-apex-column.php">Column</a>
-                  </li>
-                  <li>
-                    <a href="charts-apex-heatmap.php">Heatmap</a>
-                  </li>
-                  <li>
-                    <a href="charts-apex-line.php">Line</a>
-                  </li>
-                  <li>
-                    <a href="charts-apex-mixed.php">Mixed</a>
-                  </li>
-                  <li>
-                    <a href="charts-apex-timeline.php">Timeline</a>
-                  </li>
-                  <li>
-                    <a href="charts-apex-boxplot.php">Boxplot</a>
-                  </li>
-                  <li>
-                    <a href="charts-apex-treemap.php">Treemap</a>
-                  </li>
-                  <li>
-                    <a href="charts-apex-pie.php">Pie</a>
-                  </li>
-                  <li>
-                    <a href="charts-apex-radar.php">Radar</a>
-                  </li>
-                  <li>
-                    <a href="charts-apex-radialbar.php">RadialBar</a>
-                  </li>
-                  <li>
-                    <a href="charts-apex-scatter.php">Scatter</a>
-                  </li>
-                  <li>
-                    <a href="charts-apex-polar-area.php">Polar Area</a>
-                  </li>
-                  <li>
-                    <a href="charts-apex-sparklines.php">Sparklines</a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li class="side-nav-item">
-              <a
-                data-bs-toggle="collapse"
-                href="#sidebarChartJSCharts"
-                aria-expanded="false"
-                aria-controls="sidebarChartJSCharts"
-              >
-                <span> ChartJS </span>
-                <span class="menu-arrow"></span>
-              </a>
-              <div class="collapse" id="sidebarChartJSCharts">
-                <ul class="side-nav-third-level">
-                  <li>
-                    <a href="charts-chartjs-area.php">Area</a>
-                  </li>
-                  <li>
-                    <a href="charts-chartjs-bar.php">Bar</a>
-                  </li>
-                  <li>
-                    <a href="charts-chartjs-line.php">Line</a>
-                  </li>
-                  <li>
-                    <a href="charts-chartjs-other.php">Other</a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </li>
-
-      <li class="side-nav-item">
-        <a
-          data-bs-toggle="collapse"
-          href="#sidebarForms"
-          aria-expanded="false"
-          aria-controls="sidebarForms"
-          class="side-nav-link"
-        >
-          <i class="ri-survey-line"></i>
-          <span> Forms </span>
-          <span class="menu-arrow"></span>
-        </a>
-        <div class="collapse" id="sidebarForms">
-          <ul class="side-nav-second-level">
-            <li>
-              <a href="form-elements.php">Basic Elements</a>
-            </li>
-            <li>
-              <a href="form-advanced.php">Form Advanced</a>
-            </li>
-            <li>
-              <a href="form-validation.php">Validation</a>
-            </li>
-            <li>
-              <a href="form-wizard.php">Wizard</a>
-            </li>
-            <li>
-              <a href="form-fileuploads.php">File Uploads</a>
-            </li>
-            <li>
-              <a href="form-editors.php">Editors</a>
-            </li>
-          </ul>
-        </div>
-      </li>
-
-      <li class="side-nav-item">
-        <a
-          data-bs-toggle="collapse"
-          href="#sidebarTables"
-          aria-expanded="false"
-          aria-controls="sidebarTables"
-          class="side-nav-link"
-        >
-          <i class="ri-table-line"></i>
-          <span> Tables </span>
-          <span class="menu-arrow"></span>
-        </a>
-        <div class="collapse" id="sidebarTables">
-          <ul class="side-nav-second-level">
-            <li>
-              <a href="tables-basic.php">Basic Tables</a>
-            </li>
-            <li>
-              <a href="tables-datatable.php">Data Tables</a>
-            </li>
-          </ul>
-        </div>
-      </li>
-
-      <li class="side-nav-item">
-        <a
-          data-bs-toggle="collapse"
-          href="#sidebarMaps"
-          aria-expanded="false"
-          aria-controls="sidebarMaps"
-          class="side-nav-link"
-        >
-          <i class="ri-treasure-map-line"></i>
-          <span> Maps </span>
-          <span class="menu-arrow"></span>
-        </a>
-        <div class="collapse" id="sidebarMaps">
-          <ul class="side-nav-second-level">
-            <li>
-              <a href="maps-google.php">Google Maps</a>
-            </li>
-            <li>
-              <a href="maps-vector.php">Vector Maps</a>
-            </li>
-          </ul>
-        </div>
-      </li>
-
-      <li class="side-nav-item">
-        <a
-          data-bs-toggle="collapse"
-          href="#sidebarMultiLevel"
-          aria-expanded="false"
-          aria-controls="sidebarMultiLevel"
-          class="side-nav-link"
-        >
-          <i class="ri-share-line"></i>
-          <span> Multi Level </span>
-          <span class="menu-arrow"></span>
-        </a>
-        <div class="collapse" id="sidebarMultiLevel">
-          <ul class="side-nav-second-level">
-            <li class="side-nav-item">
-              <a
-                data-bs-toggle="collapse"
-                href="#sidebarSecondLevel"
-                aria-expanded="false"
-                aria-controls="sidebarSecondLevel"
-              >
-                <span> Second Level </span>
-                <span class="menu-arrow"></span>
-              </a>
-              <div class="collapse" id="sidebarSecondLevel">
-                <ul class="side-nav-third-level">
-                  <li>
-                    <a href="javascript: void(0);">Item 1</a>
-                  </li>
-                  <li>
-                    <a href="javascript: void(0);">Item 2</a>
-                  </li>
-                </ul>
-              </div>
-            </li>
-            <li class="side-nav-item">
-              <a
-                data-bs-toggle="collapse"
-                href="#sidebarThirdLevel"
-                aria-expanded="false"
-                aria-controls="sidebarThirdLevel"
-              >
-                <span> Third Level </span>
-                <span class="menu-arrow"></span>
-              </a>
-              <div class="collapse" id="sidebarThirdLevel">
-                <ul class="side-nav-third-level">
-                  <li>
-                    <a href="javascript: void(0);">Item 1</a>
-                  </li>
-                  <li class="side-nav-item">
-                    <a
-                      data-bs-toggle="collapse"
-                      href="#sidebarFourthLevel"
-                      aria-expanded="false"
-                      aria-controls="sidebarFourthLevel"
-                    >
-                      <span> Item 2 </span>
-                      <span class="menu-arrow"></span>
-                    </a>
-                    <div class="collapse" id="sidebarFourthLevel">
-                      <ul class="side-nav-forth-level">
-                        <li>
-                          <a href="javascript: void(0);">Item 2.1</a>
-                        </li>
-                        <li>
-                          <a href="javascript: void(0);">Item 2.2</a>
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </li>
-          </ul>
-        </div>
       </li>
     </ul>
     <!--- End Sidemenu -->

@@ -49,8 +49,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $error = "All fields are required.";
         } elseif ($password !== $confirm_password) {
             $error = "Passwords do not match.";
-        } elseif (!validate_password_strength($password)) {
-            $error = "Password does not meet security requirements.";
         } else {
             try {
                 // Use prepared statements with parameter binding
@@ -80,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         // Clear session data related to password reset
                         $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 
-                        $success = "Your password has been reset successfully. You can now <a href='login.php'>login</a>.";
+                        $success = "Your password has been reset successfully. You can now login.";
                     } catch (PDOException $e) {
                         // Roll back transaction on error
                         $pdo->rollBack();
@@ -156,6 +154,25 @@ function validate_password_strength($password)
             margin-bottom: 15px;
         }
     </style>
+
+<?php if (!empty($success)): ?>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hide the reset form
+            document.getElementById('reset-form').style.display = 'none';
+            
+            // Create and show redirect message
+            const redirectDiv = document.createElement('div');
+            redirectDiv.id = 'redirectParent';
+            redirectDiv.className = 'alert alert-success text-center';
+            redirectDiv.innerHTML = '<?php echo addslashes($success); ?>';
+            
+            // Insert after the card header
+            const cardBody = document.querySelector('.card-body');
+            cardBody.insertBefore(redirectDiv, cardBody.firstChild);
+        });
+    </script>
+<?php endif; ?>
 </head>
 </head>
 
@@ -188,11 +205,6 @@ function validate_password_strength($password)
                             <?php if (!empty($error)): ?>
                                 <div class="alert alert-danger" role="alert">
                                     <strong>Error - </strong> <?php echo htmlspecialchars($error); ?>
-                                </div>
-                            <?php endif; ?>
-                            <?php if (!empty($success)): ?>
-                                <div class="alert alert-success" role="alert">
-                                    <strong>Success - </strong> <?php echo htmlspecialchars($success); ?>
                                 </div>
                             <?php endif; ?>
 
@@ -240,6 +252,8 @@ function validate_password_strength($password)
                                         Password</button>
                                 </div>
                             </form>
+
+                            <p id="redirectParent" class="text-center">Go to your account <a href="login.php" class="text-muted ms-1 link-offset-3 text-decoration-underline"><b>Login</b></a></p>
                         </div>
                     </div>
                     <!-- end card -->
@@ -284,35 +298,38 @@ function validate_password_strength($password)
 
             // Functions
             function validatePassword() {
-                const value = passwordInput.value;
-                let score = 0;
-                let maxScore = 0;
-
-                // Calculate password strength
-                Object.values(criteria).forEach(criterion => {
-                    maxScore += criterion.weight;
-                    if (criterion.regex.test(value)) {
-                        score += criterion.weight;
-                    }
-                });
-
-                const percentScore = (score / maxScore) * 100;
-
-                // Update UI according to strength
-                passwordStrengthMeter.style.width = percentScore + '%';
-                passwordStrengthMeter.className = '';
-
-                if (percentScore < 40) {
-                    passwordStrengthMeter.classList.add('weak');
-                    return false;
-                } else if (percentScore < 80) {
-                    passwordStrengthMeter.classList.add('medium');
-                    return percentScore >= 60; // Only medium-strong is acceptable
-                } else {
-                    passwordStrengthMeter.classList.add('strong');
-                    return true;
-                }
-            }
+    const value = passwordInput.value;
+    let meetsRequirements = true;
+    
+    // Check all requirements (same as PHP)
+    const hasUppercase = /[A-Z]/.test(value);
+    const hasLowercase = /[a-z]/.test(value);
+    const hasNumber = /[0-9]/.test(value);
+    const hasSpecial = /[^A-Za-z0-9]/.test(value);
+    const hasLength = value.length >= 8;
+    
+    // Calculate how many requirements are met (out of 5 total)
+    const requirementsMet = [hasUppercase, hasLowercase, hasNumber, hasSpecial, hasLength].filter(Boolean).length;
+    const percentScore = (requirementsMet / 5) * 100;
+    
+    // Update UI
+    passwordStrengthMeter.style.width = percentScore + '%';
+    passwordStrengthMeter.className = '';
+    
+    // Adjusted thresholds (65-70% range)
+    if (percentScore < 65) {  // Changed from 60 to 65
+        passwordStrengthMeter.classList.add('weak');
+        meetsRequirements = false;
+    } else if (percentScore < 100) {
+        passwordStrengthMeter.classList.add('medium');
+        meetsRequirements = percentScore >= 70; // Changed from 80 to 70
+    } else {
+        passwordStrengthMeter.classList.add('strong');
+        meetsRequirements = true;
+    }
+    
+    return meetsRequirements;
+}
 
             function validateForm() {
                 const isPasswordValid = validatePassword();

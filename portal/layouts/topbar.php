@@ -119,18 +119,12 @@
                     </div>
 
                     
-                    <a href="pages-profile.php" class="dropdown-item">
+                    <a href="profile.php" class="dropdown-item">
                         <i class="ri-account-circle-line fs-18 align-middle me-1"></i>
                         <span>My Profile</span>
                     </a>
-
                     
-                    <a href="pages-profile.php" class="dropdown-item">
-                        <i class="ri-settings-4-line fs-18 align-middle me-1"></i>
-                        <span>Settings</span>
-                    </a>
-                    
-                    <a href="auth-logout-2.php" class="dropdown-item">
+                    <a href="logout.php" class="dropdown-item">
                         <i class="ri-logout-box-line fs-18 align-middle me-1"></i>
                         <span>Logout</span>
                     </a>

@@ -2,17 +2,6 @@
 // Initialize session
 session_start();
 
-// Include layout files (if they exist)
-if (file_exists('layouts/session.php')) {
-    include 'layouts/session.php';
-}
-if (file_exists('layouts/main.php')) {
-    include 'layouts/main.php';
-}
-
-// Set error reporting
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
 
 
 // Initialize variables

@@ -1,4 +1,3 @@
-
 <?php
 // Include database connection
 try {

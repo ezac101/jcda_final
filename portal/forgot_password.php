@@ -145,7 +145,7 @@ function send_reset_email($email, $token) {
         $mail->addReplyTo(SMTP_FROM_EMAIL, SMTP_FROM_NAME);
 
         // Generate message
-        $reset_url = 'https://' . $_SERVER['HTTP_HOST'] . '/dashboard/portal/reset_password.php?token=' . urlencode($token);
+        $reset_url = 'https://' . $_SERVER['HTTP_HOST'] . '/portal/reset_password.php?token=' . urlencode($token);
         
         // Content
         $mail->isHTML(true);

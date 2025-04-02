@@ -1,5 +1,3 @@
-
-
 <?php
 require_once 'includes/config.php';
 require_once 'includes/db.php';
@@ -17,10 +15,10 @@ if (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] !== 'on') {
 }
 
 // Regenerate session ID to prevent session fixation
-if (!isset($_SESSION['regenerated'])) {
-    session_regenerate_id(true);
-    $_SESSION['regenerated'] = true;
-}
+// if (!isset($_SESSION['regenerated'])) {
+//     session_regenerate_id(true);
+//     $_SESSION['regenerated'] = true;
+// }
 
 // Check if user is logged in
 if ($_SESSION['userLoggedIn'] == false) {

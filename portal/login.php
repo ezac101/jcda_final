@@ -156,7 +156,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </div>
 
                                 <div class="mb-3">
-                                    <a href="reset.php" class="text-muted float-end fs-12">Forgot your password?</a>
+                                    <a href="forgot_password.php" class="text-muted float-end fs-12">Forgot your password?</a>
                                     <label for="password" class="form-label">Password</label>
                                     <div class="input-group input-group-merge">
                                         <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password">

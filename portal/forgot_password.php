@@ -145,7 +145,7 @@ function send_reset_email($email, $token) {
         $mail->addReplyTo(SMTP_FROM_EMAIL, SMTP_FROM_NAME);
 
         // Generate message
-        $reset_url = 'https://' . $_SERVER['HTTP_HOST'] . '/dashboard/public/reset_password.php?token=' . urlencode($token);
+        $reset_url = 'https://' . $_SERVER['HTTP_HOST'] . '/dashboard/portal/reset_password.php?token=' . urlencode($token);
         
         // Content
         $mail->isHTML(true);
@@ -221,6 +221,13 @@ TEXT;
                         </div>
 
                         <div class="card-body p-4">
+
+                            <div class="text-center w-75 m-auto">
+                                <h4 class="text-dark-50 text-center mt-0 fw-bold">Reset Password</h4>
+                                <p class="text-muted mb-4">Enter your email address and we'll send you an email with
+                                    instructions to reset your password.</p>
+                            </div>
+
                             <?php if (!empty($error)): ?>
                                 <div class="alert alert-danger" role="alert">
                                     <strong>Error - </strong> <?php echo htmlspecialchars($error); ?>
@@ -231,12 +238,6 @@ TEXT;
                                     <strong>Success - </strong> <?php echo htmlspecialchars($success); ?>
                                 </div>
                             <?php endif; ?>
-
-                            <div class="text-center w-75 m-auto">
-                                <h4 class="text-dark-50 text-center mt-0 fw-bold">Reset Password</h4>
-                                <p class="text-muted mb-4">Enter your email address and we'll send you an email with
-                                    instructions to reset your password.</p>
-                            </div>
 
                             <?php if (!$email_sent): ?>
                             <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" id="reset-form" novalidate>

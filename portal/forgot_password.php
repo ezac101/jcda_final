@@ -153,7 +153,7 @@ function send_reset_email($email, $token) {
         $mail->Body = <<<HTML
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #ddd; border-radius: 5px;">
             <div style="text-align: center; margin-bottom: 20px;">
-                <img src="https://jcda.com.ng/assets/images/logo.png" alt="JCDA Logo" style="max-width: 150px;">
+                <img src="https://asset.cloudinary.com/dtqzcsq0i/b13f0a9269b9917d497172a843fa290b" alt="JCDA Logo" style="max-width: 150px;">
             </div>
             <h2 style="color: #00a86b;">Password Reset Request</h2>
             <p>Hello,</p>

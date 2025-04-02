@@ -177,7 +177,7 @@
 
             domtoimage.toPng(node, {
                 quality: 1,
-                bgcolor: '#fff',
+                bgcolor: '#d0d0d0',
                 width: node.offsetWidth * 2,
                 height: node.offsetHeight * 2,
                 style: {

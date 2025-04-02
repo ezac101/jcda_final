@@ -1,5 +1,4 @@
-<?php include 'layouts/session.php'; ?>
-<?php include 'layouts/main.php'; ?>
+
 
 <?php
 // Include database connection
@@ -67,7 +66,8 @@ try {
     exit;
 }
 ?>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <title>View User | JCDA Admin Portal</title>
     <?php include 'layouts/title-meta.php'; ?>

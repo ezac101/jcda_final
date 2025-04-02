@@ -1,5 +1,3 @@
-<?php include 'layouts/session.php'; ?>
-<?php include 'layouts/main.php'; ?>
 
 <?php
 // filepath: /Users/user/Desktop/JCDA3/dashboard/public/forgot_password.php
@@ -192,7 +190,8 @@ TEXT;
     }
 }
 ?>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <title>Forgot Password</title>
     <?php include 'layouts/title-meta.php'; ?>

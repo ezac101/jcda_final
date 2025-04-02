@@ -1,5 +1,3 @@
-<?php include 'layouts/session.php'; ?>
-<?php include 'layouts/main.php'; ?>
 
 <?php
 require_once 'includes/config.php';
@@ -114,7 +112,8 @@ function validate_password_strength($password)
         preg_match('/[^A-Za-z0-9]/', $password);
 }
 ?>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <title>Reset</title>
     <?php include 'layouts/title-meta.php'; ?>

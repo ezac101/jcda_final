@@ -1,6 +1,3 @@
-<?php include 'layouts/session.php'; ?>
-<?php include 'layouts/main.php'; ?>
-
 <?php
 require_once 'includes/config.php';
 require_once 'includes/db.php';
@@ -109,6 +106,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <title>Log In | JCDA</title>
     <?php include 'layouts/title-meta.php'; ?>

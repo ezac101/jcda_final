@@ -1,5 +1,4 @@
-<?php include 'layouts/session.php'; ?>
-<?php include 'layouts/main.php'; ?>
+
 
 <?php
 // Include database connection
@@ -177,7 +176,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <title>Add New User | JCDA Admin Portal</title>
     <?php include 'layouts/title-meta.php'; ?>

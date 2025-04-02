@@ -1,5 +1,4 @@
-<?php include 'layouts/session.php'; ?>
-<?php include 'layouts/main.php'; ?>
+
 
 <?php
 require_once 'includes/config.php';
@@ -115,6 +114,8 @@ function send_otp_email($email, $otp) {
     }
 }
 ?>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <title>Register</title>

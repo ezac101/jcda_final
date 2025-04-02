@@ -1,5 +1,4 @@
-<?php include 'layouts/session.php'; ?>
-<?php include 'layouts/main.php'; ?>
+
 
 <?php
 require_once 'includes/config.php';
@@ -201,7 +200,8 @@ $states_lgas = [
 
 $profile_picture = $profile['profile_picture'] ?? 'assets/images/useravatar.jpg';
 ?>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
 
     <title>Profile</title>

@@ -1,5 +1,3 @@
-<?php include 'layouts/session.php'; ?>
-<?php include 'layouts/main.php'; ?>
 
 <?php
 // Include database connection
@@ -61,7 +59,8 @@ $stmt->bindValue(count($params) + 2, $per_page, PDO::PARAM_INT);
 $stmt->execute();
 $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <title>User Management | JCDA Admin Portal</title>
     <?php include 'layouts/title-meta.php'; ?>

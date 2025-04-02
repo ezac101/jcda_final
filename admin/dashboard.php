@@ -1,5 +1,4 @@
-<?php include 'layouts/session.php'; ?>
-<?php include 'layouts/main.php'; ?>
+
 
 <?php
 // Include database connection
@@ -65,6 +64,8 @@ try {
     $recent_users = [];
 }
 ?>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <title>Admin Dashboard | JCDA Admin Portal</title>

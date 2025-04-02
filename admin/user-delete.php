@@ -1,5 +1,3 @@
-<?php include 'layouts/session.php'; ?>
-<?php include 'layouts/main.php'; ?>
 
 <?php
 // Include database connection
@@ -130,7 +128,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($errors)) {
     }
 }
 ?>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <title>Delete User | JCDA Admin Portal</title>
     <?php include 'layouts/title-meta.php'; ?>

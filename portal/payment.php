@@ -1,15 +1,9 @@
-<?php include 'layouts/session.php'; ?>
-<?php include 'layouts/main.php'; ?>
+
 
 <?php
 require_once 'includes/config.php';
 require_once 'includes/db.php';
 require_once 'includes/functions.php';
-
-// Start session if not already started
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
 
 // Check if user is logged in
 if ($_SESSION['userLoggedIn'] == false) {
@@ -181,7 +175,8 @@ if (isset($_SESSION['alert'])) {
     unset($_SESSION['alert_class']);
 }
 ?>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
 
     <title>Dues</title>

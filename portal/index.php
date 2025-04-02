@@ -1,5 +1,4 @@
-<?php include 'layouts/session.php'; ?>
-<?php include 'layouts/main.php'; ?>
+
 
 <?php
 require_once 'includes/config.php';
@@ -88,7 +87,8 @@ if ($payment) {
     $formattedDate = 'No payment submitted';
 }
 ?>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
 
     <title>Dashboard | JCDA</title>

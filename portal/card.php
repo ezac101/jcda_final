@@ -1,5 +1,3 @@
-<?php include 'layouts/session.php'; ?>
-<?php include 'layouts/main.php'; ?>
 
 <?php
 require_once 'includes/config.php';
@@ -74,7 +72,8 @@ try {
     error_log("Error checking payment status: " . $e->getMessage());
 }
 ?>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
 
     <title>Dashboard | Attex - Bootstrap 5 Admin & Dashboard Template</title>

@@ -21,7 +21,7 @@ if (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] !== 'on') {
 // }
 
 // Check if user is logged in
-if ($_SESSION['userLoggedIn'] == false) {
+if (!isset($_SESSION['userLoggedIn']) || $_SESSION['userLoggedIn'] == false) {
     header("Location: login.php");
     exit;
 }

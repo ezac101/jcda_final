@@ -10,7 +10,7 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 // Check if user is logged in
-if ($_SESSION['userLoggedIn'] == false) {
+if (!isset($_SESSION['userLoggedIn']) || $_SESSION['userLoggedIn'] == false) {
     header("Location: login.php");
     exit;
 }

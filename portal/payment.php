@@ -6,7 +6,7 @@ require_once 'includes/db.php';
 require_once 'includes/functions.php';
 
 // Check if user is logged in
-if ($_SESSION['userLoggedIn'] == false) {
+if (!isset($_SESSION['userLoggedIn']) || $_SESSION['userLoggedIn'] == false) {
     header("Location: login.php");
     exit;
 }

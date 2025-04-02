@@ -12,7 +12,6 @@ if (!isset($_SESSION['userLoggedIn']) || $_SESSION['userLoggedIn'] == false) {
 $user_id = $_SESSION['user_id'];
 $username = $_SESSION['username'];
 
-echo $user_id;
 // Fetch user information
 $stmt = $pdo->prepare("SELECT u.email, p.full_name, p.phone, p.profile_picture FROM users u LEFT JOIN profiles p ON u.id = p.user_id WHERE u.id = ?");
 $stmt->execute([$user_id]);

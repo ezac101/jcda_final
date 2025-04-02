@@ -35,6 +35,7 @@ $stmt = $pdo->prepare("SELECT *, updated FROM profiles WHERE user_id = ?");
 $stmt->execute([$user_id]);
 $profile = $stmt->fetch(PDO::FETCH_ASSOC);
 
+
 $error = '';
 $success = '';
 
@@ -309,6 +310,10 @@ $profile_picture = $profile['profile_picture'] ?? 'assets/images/useravatar.jpg'
                                                     name="date_of_birth" class="form-control"
                                                     value="<?php echo $profile ? $profile['date_of_birth'] : ''; ?>"
                                                     required>
+
+                                                <div role="alert" id="ageError" style="margin-top: 10px;color: #d94e6a;display: none">
+                                                    <strong>Error - </strong> Age must be between 18 and 100 years
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
@@ -664,6 +669,42 @@ if ($('#profile_picture')[0].files[0]) {
             const profilePictureInput = document.getElementById('profile_picture');
             const dobInput = document.getElementById('date_of_birth');
             const userProfileImage = document.querySelector('.user-profile img');
+            const submitButton = document.getElementById('submitBtn');
+            const ageError = document.getElementById('ageError');
+
+
+function validateDateOfBirth() {
+    const selectedDate = new Date(dobInput.value);
+    const today = new Date();
+    let age = today.getFullYear() - selectedDate.getFullYear();
+    
+    // Adjust age if birthday hasn't occurred yet this year
+    const monthDiff = today.getMonth() - selectedDate.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < selectedDate.getDate())) {
+        age--;
+    }
+    
+    if (!dobInput.value || age < 18 || age > 100) {
+        ageError.style.display = 'block';
+        submitButton.disabled = true;
+        return false;
+    }
+    
+    ageError.style.display = 'none';
+    submitButton.disabled = false;
+    return true;
+}
+
+// Event listeners for real-time validation
+dobInput.addEventListener('change', validateDateOfBirth);
+dobInput.addEventListener('blur', validateDateOfBirth); // Triggers when leaving the field
+
+// Optional: Validate on input (for real-time feedback)
+dobInput.addEventListener('input', function() {
+    if (dobInput.value) { // Only validate if there's a value
+        validateDateOfBirth();
+    }
+});
 
             // Sidebar functionality
             function toggleSidebar() {
@@ -718,20 +759,6 @@ if ($('#profile_picture')[0].files[0]) {
                 }
             }
 
-            // Date validation
-            function validateDateOfBirth() {
-                const selectedDate = new Date(dobInput.value);
-                const today = new Date();
-                const age = today.getFullYear() - selectedDate.getFullYear();
-                
-                if (age < 18 || age > 100) {
-                    showNotification('Age must be between 18 and 100 years', 'error');
-                    dobInput.value = '';
-                    return false;
-                }
-                return true;
-            }
-
             // Profile picture preview
             function handleProfilePictureChange(event) {
                 const file = event.target.files[0];
@@ -779,7 +806,6 @@ if ($('#profile_picture')[0].files[0]) {
 
             stateSelect.addEventListener('change', updateLGAOptions);
             profileForm.addEventListener('submit', validateForm);
-            dobInput.addEventListener('change', validateDateOfBirth);
             profilePictureInput.addEventListener('change', handleProfilePictureChange);
 
             // Form field validation

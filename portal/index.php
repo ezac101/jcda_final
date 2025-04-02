@@ -56,31 +56,36 @@ $latest_payment = $stmt->fetch(PDO::FETCH_ASSOC);
 // Set default profile picture if none is set
 $profile_picture = $profile['profile_picture'] ?? 'assets/images/useravatar.jpg';
 
-
-$query = "SELECT expiry_date 
+// Query to get the most recent payment (regardless of status)
+$query = "SELECT expiry_date, payment_status 
           FROM payments 
-          WHERE user_id = :user_id 
-          AND payment_status = 'success'
+          WHERE user_id = :user_id
           ORDER BY payment_date DESC 
           LIMIT 1";
-          
+
 $stmt = $pdo->prepare($query);
 $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
 $stmt->execute();
 $payment = $stmt->fetch(PDO::FETCH_ASSOC);
 
-// Check if a successful payment exists
-if ($payment && !empty($payment['expiry_date'])) {
-    $expiryDate = new DateTime($payment['expiry_date']);
-    $currentDate = new DateTime();
-    
-    // Determine status
-    $status = ($expiryDate > $currentDate) ? 'Active' : 'Expired';
-    $formattedDate = $expiryDate->format('d/m/Y');
+// Determine status
+if ($payment) {
+    if (!empty($payment['expiry_date'])) {
+        // Has expiry date - check if active or expired
+        $expiryDate = new DateTime($payment['expiry_date']);
+        $currentDate = new DateTime();
+
+        $status = ($expiryDate > $currentDate) ? 'Active' : 'Expired';
+        $formattedDate = $expiryDate->format('d/m/Y');
+    } else {
+        // Payment exists but has no expiry date
+        $status = 'Pending';
+        $formattedDate = 'Payment processing';
+    }
 } else {
-    // No successful payment found
-    $status = 'Expired';
-    $formattedDate = 'No active payment';
+    // No payment records exist at all
+    $status = 'Pending';
+    $formattedDate = 'No payment submitted';
 }
 ?>
 
@@ -137,15 +142,20 @@ if ($payment && !empty($payment['expiry_date'])) {
                                         <div class="col-16">
 
                                             <?php if ($profile): ?>
-                                                
-                                            <h5 class="text-uppercase fs-13 mt-0 text-truncate" title="Active Users">
-                                                Profile Summary</h5>
-                                                <h2 class="my-2 py-1 mb-0" id="active-users-count"><?php echo htmlspecialchars($profile['firstname'] . (!empty($profile['other_names']) ? ' ' . $profile['other_names'] : '') . ' ' . $profile['surname']); ?></h2>
-                                                <span class="text-nowrap"><?php echo htmlspecialchars($profile['occupation']); ?></span>
+
+                                                <h5 class="text-uppercase fs-13 mt-0 text-truncate" title="Active Users">
+                                                    Profile Summary</h5>
+                                                <h2 class="my-2 py-1 mb-0" id="active-users-count">
+                                                    <?php echo htmlspecialchars($profile['firstname'] . (!empty($profile['other_names']) ? ' ' . $profile['other_names'] : '') . ' ' . $profile['surname']); ?>
+                                                </h2>
+                                                <span
+                                                    class="text-nowrap"><?php echo htmlspecialchars($profile['occupation']); ?></span>
                                             <?php else: ?>
-                                                <p class="text-nowrap mb-1" style="font-size: 26px;">Profile incomplete..</p>
+                                                <p class="text-nowrap mb-1" style="font-size: 26px;">Profile incomplete..
+                                                </p>
                                                 <p class="text-nowrap mb-1">Click below to complete your profile.</p>
-                                                <a href="profile.php" class="link-success link-offset-3 fw-bold">Edit profile <i class="ri-arrow-right-line"></i></a>
+                                                <a href="profile.php" class="link-success link-offset-3 fw-bold">Edit
+                                                    profile <i class="ri-arrow-right-line"></i></a>
                                             <?php endif; ?>
                                         </div>
                                     </div>
@@ -159,8 +169,15 @@ if ($payment && !empty($payment['expiry_date'])) {
                                         <div class="col-12">
                                             <h5 class="text-uppercase fs-13 mt-0 text-truncate" title="Active Users">
                                                 Membership Status</h5>
-                                                <h2 class="my-2 py-1 mb-0" id="active-users-count"><?php echo $status; ?></h2>
-                                                <span class="text-wrap">Your annual membership expiry date is on <?php echo $formattedDate; ?></span>
+                                            <h2 class="my-2 py-1 mb-0" id="active-users-count"><?php echo $status; ?>
+                                            </h2>
+                                            <span class="text-wrap"><?php if ($status === 'Pending'): ?>
+                                                    Your membership is pending
+                                                <?php else: ?>
+                                                    Your membership
+                                                    <?php echo $status === 'Active' ? 'expires' : 'expired'; ?> on
+                                                    <?php echo htmlspecialchars($formattedDate); ?>
+                                                <?php endif; ?></span>
                                         </div>
                                     </div>
                                 </div>

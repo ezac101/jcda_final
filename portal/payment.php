@@ -233,7 +233,7 @@ if (isset($_SESSION['alert'])) {
 
                     <div class="row">
                         <div class="col-xl-5 col-lg-6">
-                            <div class="card cta-box overflow-hidden" style="background: #2f7740;">
+                            <div class="card cta-box overflow-hidden">
                             <?php
                             // Check for active payment and get expiry date
                             $activePayment = null;
@@ -271,7 +271,7 @@ if (isset($_SESSION['alert'])) {
                                             <p class="text-muted fs-14">Click below to pay your membership dues in the
                                                 amount of <strong>₦<?php echo number_format($annual_dues, 2);?></strong></p>
 
-                                                <form action="payment.php" method="POST">
+                                            <form action="payment.php" method="POST">
                                                 <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
                                                 <input type="hidden" name="email" value="<?php echo $user['email']; ?>">
                                                 <input type="hidden" name="amount" value="<?php echo $annual_dues; ?>">

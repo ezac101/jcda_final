@@ -1,4 +1,3 @@
-
 <?php
 // filepath: /Users/user/Desktop/JCDA3/dashboard/public/forgot_password.php
 require_once 'includes/config.php';

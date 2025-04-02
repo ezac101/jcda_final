@@ -1,9 +1,92 @@
 <?php include 'layouts/session.php'; ?>
 <?php include 'layouts/main.php'; ?>
 
+<?php
+require_once 'includes/config.php';
+require_once 'includes/db.php';
+require_once 'includes/functions.php';
+
+// Check if session is not already started
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Force HTTPS
+if (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] !== 'on') {
+    header('Location: https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+    exit;
+}
+
+// Regenerate session ID to prevent session fixation
+if (!isset($_SESSION['regenerated'])) {
+    session_regenerate_id(true);
+    $_SESSION['regenerated'] = true;
+}
+
+// Check if user is logged in
+if ($_SESSION['userLoggedIn'] == false) {
+    header("Location: login.php");
+    exit;
+}
+
+// Implement session timeout
+$timeout_duration = 1800; // 30 minutes
+if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity']) > $timeout_duration) {
+    session_unset();
+    session_destroy();
+    header("Location: login.php");
+    exit;
+}
+$_SESSION['last_activity'] = time();
+
+$user_id = $_SESSION['user_id'];
+$username = $_SESSION['username'];
+
+
+// Fetch user profile information
+$stmt = $pdo->prepare("SELECT * FROM profiles WHERE user_id = ?");
+$stmt->execute([$user_id]);
+$profile = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// Fetch latest payment information
+$stmt = $pdo->prepare("SELECT * FROM payments WHERE user_id = ? ORDER BY payment_date DESC LIMIT 1");
+$stmt->execute([$user_id]);
+$latest_payment = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// Set default profile picture if none is set
+$profile_picture = $profile['profile_picture'] ?? 'assets/images/useravatar.jpg';
+
+
+$query = "SELECT expiry_date 
+          FROM payments 
+          WHERE user_id = :user_id 
+          AND payment_status = 'success'
+          ORDER BY payment_date DESC 
+          LIMIT 1";
+          
+$stmt = $pdo->prepare($query);
+$stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+$stmt->execute();
+$payment = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// Check if a successful payment exists
+if ($payment && !empty($payment['expiry_date'])) {
+    $expiryDate = new DateTime($payment['expiry_date']);
+    $currentDate = new DateTime();
+    
+    // Determine status
+    $status = ($expiryDate > $currentDate) ? 'Active' : 'Expired';
+    $formattedDate = $expiryDate->format('d/m/Y');
+} else {
+    // No successful payment found
+    $status = 'Expired';
+    $formattedDate = 'No active payment';
+}
+?>
+
 <head>
 
-    <title>Dashboard | Attex - Bootstrap 5 Admin & Dashboard Template</title>
+    <title>Dashboard | JCDA</title>
     <?php include 'layouts/title-meta.php'; ?>
 
     <!-- Daterangepicker css -->
@@ -41,7 +124,7 @@
                                         </a>
                                     </form>
                                 </div>
-                                <h4 class="page-title">Welcome Tosha!</h4>
+                                <h4 class="page-title">Welcome!</h4>
                             </div>
                         </div>
                     </div>
@@ -52,10 +135,18 @@
                                 <div class="card-body">
                                     <div class="row align-items-center">
                                         <div class="col-16">
+
+                                            <?php if ($profile): ?>
+                                                
                                             <h5 class="text-uppercase fs-13 mt-0 text-truncate" title="Active Users">
                                                 Profile Summary</h5>
-                                            <h2 class="my-2 py-1 mb-0" id="active-users-count">Tosha Lydia</h2>
-                                            <span class="text-nowrap">Web Developer</span>
+                                                <h2 class="my-2 py-1 mb-0" id="active-users-count"><?php echo htmlspecialchars($profile['firstname'] . (!empty($profile['other_names']) ? ' ' . $profile['other_names'] : '') . ' ' . $profile['surname']); ?></h2>
+                                                <span class="text-nowrap"><?php echo htmlspecialchars($profile['occupation']); ?></span>
+                                            <?php else: ?>
+                                                <p class="text-nowrap mb-1" style="font-size: 26px;">Profile incomplete..</p>
+                                                <p class="text-nowrap mb-1">Click below to complete your profile.</p>
+                                                <a href="profile.php" class="link-success link-offset-3 fw-bold">Edit profile <i class="ri-arrow-right-line"></i></a>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>
@@ -68,8 +159,8 @@
                                         <div class="col-12">
                                             <h5 class="text-uppercase fs-13 mt-0 text-truncate" title="Active Users">
                                                 Membership Status</h5>
-                                            <h2 class="my-2 py-1 mb-0" id="active-users-count">Active</h2>
-                                            <span class="text-wrap">Your annual membership expires on 24/09/2026</span>
+                                                <h2 class="my-2 py-1 mb-0" id="active-users-count"><?php echo $status; ?></h2>
+                                                <span class="text-wrap">Your annual membership expiry date is on <?php echo $formattedDate; ?></span>
                                         </div>
                                     </div>
                                 </div>
@@ -93,26 +184,29 @@
 
                     <div class="row">
                         <div class="col-xl-5 col-lg-6">
-                        <div class="card cta-box overflow-hidden">
+                            <div class="card cta-box overflow-hidden">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center" style="justify-content: space-between;">
                                         <div>
                                             <h3 class="mt-0 fw-normal cta-box-title">View your ID card</h3>
-                                            <a href="card.php" class="link-success link-offset-3 fw-bold">View card <i class="ri-arrow-right-line"></i></a>
+                                            <a href="card.php" class="link-success link-offset-3 fw-bold">View card <i
+                                                    class="ri-arrow-right-line"></i></a>
                                         </div>
-                                        <i class="bi bi-card-heading ms-3 fs-20" style="font-size: 40px !important;"></i>
+                                        <i class="bi bi-card-heading ms-3 fs-20"
+                                            style="font-size: 40px !important;"></i>
                                     </div>
                                 </div>
                                 <!-- end card-body -->
                             </div>
                         </div>
                         <div class="col-xl-5 col-lg-6">
-                        <div class="card cta-box overflow-hidden">
+                            <div class="card cta-box overflow-hidden">
                                 <div class="card-body">
                                     <div class="d-flex align-items-center" style="justify-content: space-between;">
                                         <div>
                                             <h3 class="mt-0 fw-normal cta-box-title">Manage your membership dues</h3>
-                                            <a href="payment.php" class="link-success link-offset-3 fw-bold">Manage dues <i class="ri-arrow-right-line"></i></a>
+                                            <a href="payment.php" class="link-success link-offset-3 fw-bold">Manage dues
+                                                <i class="ri-arrow-right-line"></i></a>
                                         </div>
                                         <i class="bi bi-cash-coin ms-3 fs-20" style="font-size: 40px !important;"></i>
                                     </div>
@@ -120,21 +214,21 @@
                                 <!-- end card-body -->
                             </div>
                         </div>
-                        </div>
                     </div>
                 </div>
-                <!-- container -->
-
             </div>
-            <!-- content -->
-
-            <?php include 'layouts/footer.php'; ?>
+            <!-- container -->
 
         </div>
+        <!-- content -->
 
-        <!-- ============================================================== -->
-        <!-- End Page content -->
-        <!-- ============================================================== -->
+        <?php include 'layouts/footer.php'; ?>
+
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- End Page content -->
+    <!-- ============================================================== -->
 
     </div>
     <!-- END wrapper -->

@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             setcookie('admin_remember', $cookie, $expires, '/', '', true, true);
                         }
                         
-                        header("Location: dashboard.php");
+                        header("Location: index.php");
                         exit;
                     } else {
                         // Failed login - wait to prevent brute force

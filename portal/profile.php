@@ -416,7 +416,7 @@ $profile_picture = $profile['profile_picture'] ?? 'assets/images/useravatar.jpg'
                                                 <img  src="<?php echo $profile_picture; ?>" alt="" style="max-width: 200px; max-height: 200px;">
                                             </div>
                                             <?php else: ?>
-                                                <input type="file" id="profile_picture" name="profile_picture" class="form-control">
+                                                <input type="file" id="profile_picture" name="profile_picture" class="form-control" required>
                                             <?php endif; ?>
                                         </div>
 

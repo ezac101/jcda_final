@@ -185,7 +185,7 @@ function validate_password_strength($password)
                     <div class="card">
 
                         <!-- Logo -->
-                        <div style="background: #378349 !important;" class="card-header py-3 text-center bg-primary">
+                        <div style="background: #783340 !important;" class="card-header py-3 text-center bg-primary">
                             <a href="index.php">
                                 <span><img src="assets/images/jcda-white.png" alt="logo" height="22"
                                         style="width: 60px;height: 60px;"></span>

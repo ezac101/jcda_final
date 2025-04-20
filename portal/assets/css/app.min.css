@@ -3951,8 +3951,8 @@ fieldset:disabled .btn {
 
 .btn-primary {
     --ct-btn-color: #fff;
-    --ct-btn-bg: #2f7740;
-    --ct-btn-border-color: #2f7740;
+    --ct-btn-bg: #783340;
+    --ct-btn-border-color: #783340;
     --ct-btn-hover-color: #fff;
     --ct-btn-hover-bg: #3959c5;
     --ct-btn-hover-border-color: #3959c5;
@@ -3962,7 +3962,7 @@ fieldset:disabled .btn {
     --ct-btn-active-border-color: #3959c5;
     --ct-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
     --ct-btn-disabled-color: #fff;
-    --ct-btn-disabled-bg: #2f7740;
+    --ct-btn-disabled-bg: #783340;
     --ct-btn-disabled-border-color: #2f7740
 }
 

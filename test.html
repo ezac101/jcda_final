@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JASAWA - Text Animation Hero</title>
+  <link rel="stylesheet" href="content/charity3/css/custom.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <img src="/api/placeholder/100/100" alt="JASAWA Logo">
+      <div class="logo-text">JASAWA</div>
+    </div>
+    <nav class="nav-links">
+      <a href="index">Home</a>
+      <a href="content/charity3/who-we-are">About Us</a>
+      <a href="/team">Exco</a>
+      <a href="/board">BoT</a>
+      <a href="gallery">Gallery</a>
+      <a href="/content/charity3/contact.html">Contact</a>
+    </nav>
+    <a href="portal/" class="login-btn">LOGIN</a>
+    <button class="mobile-menu-btn" id="menuBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
+  </header>
+  
+  <div class="mobile-nav" id="mobileNav">
+    <button class="mobile-nav-close" id="closeBtn">×</button>
+    <div class="mobile-nav-links">
+        <a href="index">Home</a>
+        <a href="content/charity3/who-we-are">About Us</a>
+        <a href="/team">Exco</a>
+        <a href="/board">BoT</a>
+        <a href="gallery">Gallery</a>
+        <a href="/content/charity3/contact.html">Contact</a>
+      <a href="portal/" class="mobile-login">LOGIN</a>
+    </div>
+  </div>
+  
+  <div class="overlay" id="overlay"></div>
+  
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="map-image"></div>
+      <div class="map-overlay"></div>
+      <div class="color-accents">
+        <div class="accent accent-1"></div>
+        <div class="accent accent-2"></div>
+        <div class="accent accent-3"></div>
+      </div>
+    </div>
+    
+    <div class="hero-content">
+      <div class="animated-title">
+        <h1 id="animatedTitle"></h1>
+      </div>
+      <p class="hero-subtitle">The JASAWA Action Plan: Building Peace, Driving Development</p>
+      <div class="cta-buttons">
+        <button class="cta-primary">Get Involved</button>
+        <button class="cta-secondary">
+          About us
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14"></path>
+            <path d="m12 5 7 7-7 7"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Mobile menu functionality
+    const menuBtn = document.getElementById('menuBtn');
+    const closeBtn = document.getElementById('closeBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    const overlay = document.getElementById('overlay');
+    
+    menuBtn.addEventListener('click', () => {
+      mobileNav.classList.add('active');
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+    
+    closeBtn.addEventListener('click', () => {
+      mobileNav.classList.remove('active');
+      overlay.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    });
+    
+    overlay.addEventListener('click', () => {
+      mobileNav.classList.remove('active');
+      overlay.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    });
+    
+    // Adjust header on scroll
+    window.addEventListener('scroll', () => {
+      const header = document.querySelector('.header');
+      if (window.scrollY > 50) {
+        header.style.padding = '0.6rem 5%';
+        header.style.boxShadow = '0 2px 15px rgba(0, 0, 0, 0.1)';
+      } else {
+        header.style.padding = '1rem 5%';
+        header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.05)';
+      }
+    });
+    
+    // Animated title implementation
+    const titleElement = document.getElementById('animatedTitle');
+    const titleText = "Jasawa Community Development Association";
+    const words = titleText.split(' ');
+    
+    // Create word and character spans
+    words.forEach((word, wordIndex) => {
+      const wordSpan = document.createElement('span');
+      wordSpan.className = 'word';
+      
+      // Split word into characters
+      for (let i = 0; i < word.length; i++) {
+        const charSpan = document.createElement('span');
+        charSpan.className = 'char';
+        charSpan.textContent = word[i];
+        charSpan.style.animationDelay = `${(wordIndex * 0.1) + (i * 0.05)}s`;
+        wordSpan.appendChild(charSpan);
+      }
+      
+      titleElement.appendChild(wordSpan);
+    });
+  </script>
+</body>
+</html>

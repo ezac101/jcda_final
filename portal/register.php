@@ -10,7 +10,9 @@ use PHPMailer\PHPMailer\Exception;
 // Check if session is not already started
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
+
 }
+
 
 // Force HTTPS
 if (!isset($_SERVER['HTTPS']) || $_SERVER['HTTPS'] !== 'on') {
@@ -91,7 +93,7 @@ function send_otp_email($email, $otp) {
         $mail->SMTPAuth = true;
         $mail->Username = SMTP_USERNAME;
         $mail->Password = SMTP_PASSWORD;
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // Use 'ssl' if PHPMailer version < 6.1
+        $mail->SMTPSecure = 'tls';  // Use 'ssl' if PHPMailer version < 6.1
         $mail->Port = SMTP_PORT;
 
         // Recipients
@@ -153,7 +155,7 @@ function send_otp_email($email, $otp) {
                     <div class="card">
 
                         <!-- Logo -->
-                        <div style="background: #378349 !important;" class="card-header py-3 text-center bg-primary">
+                        <div style="background: #783340 !important;" class="card-header py-3 text-center bg-primary">
                             <a href="index.php">
                                 <span><img src="assets/images/jcda-white.png" alt="logo" height="22" style="width: 60px;height: 60px;"></span>
                                 <p class="text-muted" style="color: white !important;margin-bottom: 0px;margin-top: 15px;">JCDA.</p>

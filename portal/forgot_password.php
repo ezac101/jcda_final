@@ -124,15 +124,15 @@ function send_reset_email($email, $token) {
         $mail->SMTPAuth   = true;
         $mail->Username   = SMTP_USERNAME;
         $mail->Password   = SMTP_PASSWORD;
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; 
+        $mail->SMTPSecure = 'tls';              // Change from SMTPS to TLS
         $mail->Port       = SMTP_PORT;
         
         // Rate limiting for security
         $mail->SMTPOptions = [
             'ssl' => [
-                'verify_peer' => true,
-                'verify_peer_name' => true,
-                'allow_self_signed' => false
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
             ]
         ];
 
@@ -209,7 +209,7 @@ TEXT;
                     <div class="card">
 
                         <!-- Logo -->
-                        <div style="background: #378349 !important;" class="card-header py-3 text-center bg-primary">
+                        <div style="background: #783340 !important;" class="card-header py-3 text-center bg-primary">
                             <a href="index.php">
                                 <span><img src="assets/images/jcda-white.png" alt="logo" height="22"
                                         style="width: 60px;height: 60px;"></span>
